@@ -1,0 +1,25 @@
+{
+  "name": "ssh-setup-action",
+  "version": "1.0.0",
+  "description": "Setup SSH",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/exec": "^1.0.3",
+    "@types/node": "^13.9.1",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrSquaare/ssh-setup-action.git"
+  },
+  "author": "MrSquaare",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrSquaare/ssh-setup-action/issues"
+  },
+  "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme"
+}

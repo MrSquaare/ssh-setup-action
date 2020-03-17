@@ -1,0 +1,20 @@
+name: "SSH Setup"
+author: "MrSquaare"
+description: "Setup SSH"
+branding:
+  icon: terminal
+  color: gray-dark
+inputs:
+  host:
+    description: "SSH hosts"
+    required: true
+  private-key:
+    description: "SSH private key"
+    required: true
+  private-key-name:
+    description: "SSH private key name"
+    default: "id_rsa"
+    required: false
+runs:
+  using: "node12"
+  main: "dist/index.js"
