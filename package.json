@@ -4,7 +4,7 @@
   "description": "Setup SSH",
   "main": "src/index.ts",
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.3",
     "@types/node": "^13.9.1",
     "typescript": "^3.8.3"
