@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable security/detect-non-literal-fs-filename */
+
 import * as core from "@actions/core";
 import * as exec from "@actions/exec";
 import * as im from "@actions/exec/lib/interfaces";
