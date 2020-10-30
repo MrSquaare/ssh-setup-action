@@ -1,9 +1,9 @@
 # ssh-setup-action
 Setup SSH
 
-![Pull Request](https://github.com/MrSquaare/ssh-setup-action/workflows/Pull%20Request/badge.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8c87d5e7a3c14640a874b228fbeb95a7)](https://www.codacy.com/manual/MrSquaare/ssh-setup-action?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MrSquaare/ssh-setup-action&amp;utm_campaign=Badge_Grade)
-![Dependabot](https://badgen.net/dependabot/MrSquaare/ssh-setup-action/?icon=dependabot)
+![Release](https://badgen.net/github/release/MrSquaare/ssh-setup-action?icon=github)
+![Dependabot](https://badgen.net/github/dependabot/MrSquaare/ssh-setup-action?icon=github)
+[![Codacy](https://app.codacy.com/project/badge/Grade/88adcccc19804fe6969e053d690a2b1d)](https://www.codacy.com/gh/MrSquaare/ssh-setup-action/dashboard)
 
 ## Usage
 
