@@ -120,7 +120,7 @@ async function run() {
     const privateKey: string = core.getInput("private-key") + "\n";
     const privateKeyName: string = core.getInput("private-key-name");
 
-    await createPrivateKey(sshPath, privateKeyName, privateKey);
+    createPrivateKey(sshPath, privateKeyName, privateKey);
 
     console.log("Private key file created.");
 
