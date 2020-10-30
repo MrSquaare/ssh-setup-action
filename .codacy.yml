@@ -1,0 +1,4 @@
+---
+exclude_paths:
+  - 'lib/**'
+  - 'node_modules/**'
