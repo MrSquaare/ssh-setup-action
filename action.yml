@@ -6,7 +6,7 @@ branding:
   color: gray-dark
 inputs:
   host:
-    description: "SSH hosts"
+    description: "SSH host"
     required: true
   private-key:
     description: "SSH private key"

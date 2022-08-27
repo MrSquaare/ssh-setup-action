@@ -2,8 +2,7 @@
 keys/
 
 # Node
-node_modules/*
-!node_modules/@actions/
+node_modules/
 
 # Jetbrains
 .idea/

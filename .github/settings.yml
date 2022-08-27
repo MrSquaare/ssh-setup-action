@@ -1,0 +1,109 @@
+labels:
+  - name: "bug"
+    color: "#C3362B"
+    description: ""
+  - name: "build"
+    color: "#CCCCCC"
+    description: ""
+  - name: "chore"
+    color: "#444444"
+    description: ""
+  - name: "dependencies"
+    color: "#0366D6"
+    description: ""
+  - name: "discussion"
+    color: "#673AB7"
+    description: ""
+  - name: "documentation"
+    color: "#795548"
+    description: ""
+  - name: "duplicate"
+    color: "#B1B1B1"
+    description: ""
+  - name: "feature"
+    color: "#03A9F4"
+    description: ""
+  - name: "good first issue"
+    color: "#7057FF"
+    description: ""
+  - name: "improvement"
+    color: "#FFCD39"
+    description: ""
+  - name: "question"
+    color: "#9C27B0"
+    description: ""
+  - name: "refactor"
+    color: "#33C9DD"
+    description: ""
+  - name: "style"
+    color: "#33ABA0"
+    description: ""
+  - name: "test"
+    color: "#70BF73"
+    description: ""
+  - name: "priority: low"
+    color: "#4CAF50"
+    description: ""
+  - name: "priority: medium"
+    color: "#FFC107"
+    description: ""
+  - name: "priority: high"
+    color: "#C3362B"
+    description: ""
+  - name: "priority: critical"
+    color: "#000000"
+    description: ""
+  - name: "status: pending"
+    color: "#FFE69C"
+    description: ""
+  - name: "status: in progress"
+    color: "#FFD699"
+    description: ""
+  - name: "status: done"
+    color: "#A6D5FA"
+    description: ""
+  - name: "status: abandoned"
+    color: "#C2B0E2"
+    description: ""
+  - name: "status: accepted"
+    color: "#B7DFB9"
+    description: ""
+  - name: "status: refused"
+    color: "#FFBCA7"
+    description: ""
+  - name: "status: review needed"
+    color: "#99E4EE"
+    description: ""
+  - name: "status: revision needed"
+    color: "#99D5CF"
+    description: ""
+  - name: "released"
+    color: "#FFFFFF"
+    description: ""
+  - name: "released on @next"
+    color: "#FFFFFF"
+    description: ""
+
+branches:
+  - name: main
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        require_code_owner_reviews: true
+        dismiss_stale_reviews: true
+      required_status_checks:
+        strict: true
+        contexts: []
+      enforce_admins: null
+      restrictions: null
+  - name: develop
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        require_code_owner_reviews: true
+        dismiss_stale_reviews: true
+      required_status_checks:
+        strict: true
+        contexts: []
+      enforce_admins: null
+      restrictions: null
