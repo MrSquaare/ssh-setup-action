@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    /* Basic Options */
-    "target": "es6",
+    "target": "es2019",
     "module": "commonjs",
-    "outDir": "./lib",
-    "rootDir": "./src",
-    /* Strict Type-Checking Options */
-    "strict": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
   }
 }
