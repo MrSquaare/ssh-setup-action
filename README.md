@@ -17,7 +17,7 @@ Setup SSH
 
 This GitHub action helps you to setup SSH.
 
-It support Node.js 12+ for Linux and macOS runners.
+It support Node.js 16+ for Linux and macOS runners.
 
 ## Using
 
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v1
+      uses: MrSquaare/ssh-setup-action@v2
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v1
+      uses: MrSquaare/ssh-setup-action@v2
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -74,13 +74,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup GitHub SSH
-      uses: MrSquaare/ssh-setup-action@v1
+      uses: MrSquaare/ssh-setup-action@v2
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
         private-key-name: github
     - name: Setup GitLab SSH
-      uses: MrSquaare/ssh-setup-action@v1
+      uses: MrSquaare/ssh-setup-action@v2
       with:
         host: gitlab.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
