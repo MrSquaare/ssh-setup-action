@@ -14,13 +14,13 @@
   "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
   "main": "src/index.ts",
   "scripts": {
-    "build": "ncc build src/index.ts -o lib -m"
+    "build": "esbuild ./src/index.ts ./src/cleanup.ts --outdir=./lib --bundle --minify --platform=node --target=node16"
   },
   "devDependencies": {
     "@types/node": "^16.11.65",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
-    "@vercel/ncc": "^0.34.0",
+    "esbuild": "^0.17.19",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

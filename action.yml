@@ -18,3 +18,5 @@ inputs:
 runs:
   using: "node16"
   main: "lib/index.js"
+  post: 'lib/cleanup.js'
+  post-if: 'always()'
