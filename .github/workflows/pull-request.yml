@@ -10,7 +10,7 @@ jobs:
           - macos-latest
           - ubuntu-latest
         node:
-          - 16
+          - 20
 
     runs-on: ${{ matrix.os }}
 
@@ -39,7 +39,7 @@ jobs:
           - macos-latest
           - ubuntu-latest
         node:
-          - 16
+          - 20
 
     runs-on: ${{ matrix.os }}
 
