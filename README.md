@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -74,13 +74,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup GitHub SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
         private-key-name: github
     - name: Setup GitLab SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: gitlab.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
