@@ -179,13 +179,16 @@ async function run() {
   const sshPath: string = await initializeSSH();
 
   core.exportVariable("SSH_PATH", sshPath);
+  core.setOutput("ssh-path", sshPath);
 
   console.log("SSH initialized.");
 
   const sshAgent: SSHAgent = await initializeSSHAgent();
 
   core.exportVariable("SSH_AGENT_PID", sshAgent.pid);
+  core.setOutput("ssh-agent-pid", sshAgent.pid);
   core.exportVariable("SSH_AUTH_SOCK", sshAgent.socket);
+  core.setOutput("ssh-auth-sock", sshAgent.socket);
 
   console.log("SSH agent initialized.");
 
