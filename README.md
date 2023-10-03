@@ -9,6 +9,8 @@ Setup SSH
 
 - [About](#about)
 - [Using](#using)
+- [Environment variables](#environment-variables)
+- [Outputs](#outputs)
 - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
@@ -37,6 +39,22 @@ jobs:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
+
+## Environment variables
+
+This action exports the following environment variables:
+
+- `SSH_PATH`: Path to SSH directory
+- `SSH_AGENT_PID`: PID of SSH agent
+- `SSH_AUTH_SOCK`: Path to SSH agent socket
+
+## Outputs
+
+This action set the following outputs:
+
+- `ssh-path`: Path to SSH directory
+- `ssh-agent-pid`: PID of SSH agent
+- `ssh-auth-sock`: Path to SSH agent socket
 
 ## Examples
 
