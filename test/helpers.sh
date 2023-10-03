@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Test helpers
 
 assert_equals () {

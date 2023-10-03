@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Load test helpers
 
 . ./test/helpers.sh
