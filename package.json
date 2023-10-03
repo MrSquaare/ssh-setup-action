@@ -14,7 +14,8 @@
   "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
   "main": "src/index.ts",
   "scripts": {
-    "build": "ncc build src/index.ts -o lib -m"
+    "build": "ncc build src/index.ts -o lib -m",
+    "test": "sh ./test/test.sh"
   },
   "devDependencies": {
     "@types/node": "^16.11.65",
