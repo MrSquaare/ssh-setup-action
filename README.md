@@ -17,7 +17,7 @@ Setup SSH
 
 This GitHub action helps you to setup SSH.
 
-It support Node.js 16+ for Linux and macOS runners.
+It support Node.js 20+ for Linux and macOS runners.
 
 ## Using
 

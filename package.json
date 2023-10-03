@@ -18,7 +18,7 @@
     "test": "sh ./test/test.sh"
   },
   "devDependencies": {
-    "@types/node": "^16.18.57",
+    "@types/node": "^20.8.2",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "@vercel/ncc": "^0.38.0",
@@ -31,7 +31,10 @@
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/exec": "^1.1.1",
-    "nanoid": "^4.0.2",
+    "nanoid": "^5.0.1",
     "valid-filename": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
