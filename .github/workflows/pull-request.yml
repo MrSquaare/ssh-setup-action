@@ -60,6 +60,7 @@ jobs:
 
       - name: Setup GitLab SSH
         uses: ./
+        id: setup
         with:
           host: gitlab.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
@@ -69,3 +70,11 @@ jobs:
         run: |
           rm -rf private-repository
           git clone git@gitlab.com:MrSquaare/private-repository.git
+
+      - name: Run tests
+        env:
+          OUTPUT_SSH_PATH: ${{ steps.setup.outputs.ssh-path }}
+          OUTPUT_SSH_AGENT_PID: ${{ steps.setup.outputs.ssh-agent-pid }}
+          OUTPUT_SSH_AUTH_SOCK: ${{ steps.setup.outputs.ssh-auth-sock }}
+        run:
+          npm run test
