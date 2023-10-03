@@ -8,7 +8,7 @@ try {
   if (error instanceof Error) {
     console.warn(
       "Error stopping the SSH agent, proceeding anyway:",
-      error.message
+      error.message,
     );
   }
   console.warn("Error stopping the SSH agent, proceeding anyway");

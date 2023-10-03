@@ -20,7 +20,7 @@ type ExecuteResult = {
 async function execute(
   command: string,
   args: string[] = [],
-  options: im.ExecOptions = {}
+  options: im.ExecOptions = {},
 ): Promise<ExecuteResult> {
   let stdout = "";
   let stderr = "";
@@ -121,10 +121,10 @@ async function initializeSSHAgent(): Promise<SSHAgent> {
   }
 
   const pidMatch: RegExpMatchArray | null = stdout.match(
-    "SSH_AGENT_PID=(.*?);"
+    "SSH_AGENT_PID=(.*?);",
   );
   const socketMatch: RegExpMatchArray | null = stdout.match(
-    "SSH_AUTH_SOCK=(.*?);"
+    "SSH_AUTH_SOCK=(.*?);",
   );
 
   return {
