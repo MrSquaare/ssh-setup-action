@@ -5,16 +5,7 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   env: {
-    es2021: true,
+    es2022: true,
     node: true,
-  },
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-  },
-  plugins: ["@typescript-eslint", "prettier"],
-  rules: {
-    "prettier/prettier": ["warn"],
   },
 };
