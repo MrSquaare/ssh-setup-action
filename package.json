@@ -1,6 +1,6 @@
 {
   "name": "ssh-setup-action",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Setup SSH",
   "repository": {
     "type": "git",
@@ -15,10 +15,12 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "ncc build src/index.ts -o lib -m",
+    "lint": "eslint .",
+    "format": "eslint --fix .",
     "test": "sh ./test/test.sh"
   },
   "devDependencies": {
-    "@types/node": "^16.18.57",
+    "@types/node": "^20.8.2",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "@vercel/ncc": "^0.38.0",
@@ -31,7 +33,10 @@
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/exec": "^1.1.1",
-    "nanoid": "^4.0.2",
+    "nanoid": "^5.0.1",
     "valid-filename": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

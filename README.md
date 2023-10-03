@@ -9,6 +9,8 @@ Setup SSH
 
 - [About](#about)
 - [Using](#using)
+- [Environment variables](#environment-variables)
+- [Outputs](#outputs)
 - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
@@ -17,7 +19,7 @@ Setup SSH
 
 This GitHub action helps you to setup SSH.
 
-It support Node.js 16+ for Linux and macOS runners.
+It support Node.js 20+ for Linux and macOS runners.
 
 ## Using
 
@@ -32,11 +34,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
+
+## Environment variables
+
+This action exports the following environment variables:
+
+- `SSH_PATH`: Path to SSH directory
+- `SSH_AGENT_PID`: PID of SSH agent
+- `SSH_AUTH_SOCK`: Path to SSH agent socket
+
+## Outputs
+
+This action set the following outputs:
+
+- `ssh-path`: Path to SSH directory
+- `ssh-agent-pid`: PID of SSH agent
+- `ssh-auth-sock`: Path to SSH agent socket
 
 ## Examples
 
@@ -53,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -74,13 +92,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup GitHub SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: github.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
         private-key-name: github
     - name: Setup GitLab SSH
-      uses: MrSquaare/ssh-setup-action@v2
+      uses: MrSquaare/ssh-setup-action@v3
       with:
         host: gitlab.com
         private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
