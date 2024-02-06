@@ -133,9 +133,9 @@ async function initializeSSHAgent(): Promise<SSHAgent> {
   };
 }
 
-async function addKnownHost(sshPath: string, host: string) {
+async function addKnownHost(sshPath: string, host: string, port: string) {
   const knownHostsPath: string = path.join(sshPath, "known_hosts");
-  const { code, stdout, stderr } = await execute("ssh-keyscan", [host]);
+  const { code, stdout, stderr } = await execute("ssh-keyscan", ["-p", port, host]);
 
   if (code !== 0) {
     console.error("Failed to add host to known hosts:", stderr);
@@ -169,6 +169,7 @@ async function addPrivateKey(sshPath: string, name: string) {
 
 async function run() {
   const host: string = core.getInput("host");
+  const port: string = core.getInput("port");
   const privateKey: string = core.getInput("private-key");
   const privateKeyName: string = core.getInput("private-key-name");
 
@@ -192,7 +193,7 @@ async function run() {
 
   console.log("SSH agent initialized.");
 
-  await addKnownHost(sshPath, host);
+  await addKnownHost(sshPath, host, port);
 
   console.log("Host added to known hosts.");
 
