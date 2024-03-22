@@ -135,7 +135,11 @@ async function initializeSSHAgent(): Promise<SSHAgent> {
 
 async function addKnownHost(sshPath: string, host: string, port: string) {
   const knownHostsPath: string = path.join(sshPath, "known_hosts");
-  const { code, stdout, stderr } = await execute("ssh-keyscan", ["-p", port, host]);
+  const { code, stdout, stderr } = await execute("ssh-keyscan", [
+    "-p",
+    port,
+    host,
+  ]);
 
   if (code !== 0) {
     console.error("Failed to add host to known hosts:", stderr);
