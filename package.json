@@ -14,6 +14,7 @@
   "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
   "main": "src/index.ts",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "ncc build src/index.ts -o lib -m",
     "lint": "eslint .",
     "format": "eslint --fix .",
