@@ -17,7 +17,9 @@ See [GUIDELINES.md](GUIDELINES.md) for more information.
 
 ### Prerequisites
 
-1. Install [act](https://github.com/nektos/act#installation)
+1. Install [Node.js](https://nodejs.org/en/download/)
+2. Install [pnpm](https://pnpm.io/installation)
+3. Install [act](https://github.com/nektos/act#installation)
 
 ### Installation
 
@@ -30,7 +32,7 @@ git clone https://github.com/MrSquaare/ssh-setup-action.git
 2. Install dependencies:
 
 ```shell script
-npm install
+pnpm install
 ```
 
 ## Building
@@ -38,7 +40,7 @@ npm install
 Build the project:
 
 ```shell script
-npm run build
+pnpm build
 ```
 
 ## Testing
@@ -46,13 +48,13 @@ npm run build
 Lint the code:
 
 ```shell script
-npm run lint
+pnpm lint
 ```
 
 Format the code:
 
 ```shell script
-npm run format
+pnpm format
 ```
 
 Run workflows with [act](https://github.com/nektos/act):
