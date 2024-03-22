@@ -6,10 +6,7 @@
 - [Git](#git)
   - [Branch](#branch)
     - [main](#main)
-    - [develop](#develop)
-    - [hot/](#hot)
-    - [bug/](#bug)
-    - [feature/](#feature)
+    - [<issue-id\>-description](#issue-id-description)
   - [Commit](#commit)
 - [Submission](#submission)
   - [Issue](#issue)
@@ -30,30 +27,11 @@ We have adopted rules on the use and nomenclature of branches. These rules are i
 This branch contains the latest stable version.
 This branch is subject to restrictions.
 
-#### develop
+#### <issue-id\>-description
 
-This branch contains the version under development.
-This branch is subject to restrictions.
-
-It is created from and merge in `main`.
-
-#### hot/
-
-These branches correspond to the correction of a critical bug.
+These branches correspond to the resolution of an issue.
 
 They are created from and merge in `main`.
-
-#### bug/
-
-These branches correspond to the correction of a bug.
-
-They are created from and merge in `develop`.
-
-#### feature/
-
-These branches correspond to the development of a feature or an improvement.
-
-They are created from and merge in `develop`.
 
 ### Commit
 
@@ -71,7 +49,7 @@ Before submitting a new pull request, make sure there are no existing features o
 
 1. Open a new issue by following the [Issue](#issue) section
 2. [Fork the repository](https://help.github.com/en/github/getting-started-with-github/fork-a-repo)
-3. Create a new branch by following the [Branch](GUIDELINES.md#branch) section of the [Git Guidelines](GUIDELINES.md#git)
+3. Create a new branch by following the [Branch](GUIDELINES.md#branch) section of the [Git Guidelines](GUIDELINES.md#git) (Tip: [Create a branch for the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-a-branch-for-an-issue))
 
 ```shell script
 git checkout -b <branch-name>
@@ -85,4 +63,4 @@ git checkout -b <branch-name>
 git push <branch-name>
 ```
 
-7. [Create a new pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork) and follow the template steps.
+7. [Create a new pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork) and follow the template steps
