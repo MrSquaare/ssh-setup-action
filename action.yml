@@ -10,8 +10,7 @@ inputs:
     required: true
   port:
     description: "SSH port"
-    type: number
-    default: 22
+    default: "22"
     required: false
   private-key:
     description: "SSH private key"
@@ -20,8 +19,15 @@ inputs:
     description: "SSH private key name"
     default: "id_rsa"
     required: false
+outputs:
+  ssh-path:
+    description: "Path to the SSH private key"
+  ssh-agent-pid:
+    description: "PID of the SSH agent"
+  ssh-auth-sock:
+    description: "Path to the SSH auth socket"
 runs:
   using: "node20"
   main: "lib/index.js"
-  post: 'lib/cleanup.js'
-  post-if: 'always()'
+  post: "lib/cleanup.js"
+  post-if: "always()"

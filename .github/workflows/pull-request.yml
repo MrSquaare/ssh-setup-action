@@ -17,19 +17,18 @@ jobs:
     name: Build on ${{ matrix.os }} with Node ${{ matrix.node }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+          cache: "pnpm"
 
       - name: Install dependencies
         run: |
@@ -51,12 +50,13 @@ jobs:
     name: Test on ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Setup GitHub SSH
         uses: ./
+        id: github
         with:
           host: github.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
@@ -65,23 +65,34 @@ jobs:
         run: |
           git clone git@github.com:MrSquaare/private-repository.git
 
+      - name: Run tests for GitHub
+        env:
+          OUTPUT_SSH_PATH: ${{ steps.github.outputs.ssh-path }}
+          OUTPUT_SSH_AGENT_PID: ${{ steps.github.outputs.ssh-agent-pid }}
+          OUTPUT_SSH_AUTH_SOCK: ${{ steps.github.outputs.ssh-auth-sock }}
+        run:
+          sh ./test/test.sh
+
       - name: Setup GitLab SSH
         uses: ./
-        id: setup
+        id: gitlab
         with:
-          host: gitlab.com
+          # GitLab supports SSH on port 443
+          # See https://docs.gitlab.com/user/gitlab_com/#alternative-ssh-port
+          host: altssh.gitlab.com
+          port: 443
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
           private-key-name: gitlab
 
       - name: Clone GitLab repository
         run: |
           rm -rf private-repository
-          git clone git@gitlab.com:MrSquaare/private-repository.git
+          git clone ssh://git@altssh.gitlab.com:443/MrSquaare/private-repository.git
 
-      - name: Run tests
+      - name: Run tests for GitLab
         env:
-          OUTPUT_SSH_PATH: ${{ steps.setup.outputs.ssh-path }}
-          OUTPUT_SSH_AGENT_PID: ${{ steps.setup.outputs.ssh-agent-pid }}
-          OUTPUT_SSH_AUTH_SOCK: ${{ steps.setup.outputs.ssh-auth-sock }}
+          OUTPUT_SSH_PATH: ${{ steps.gitlab.outputs.ssh-path }}
+          OUTPUT_SSH_AGENT_PID: ${{ steps.gitlab.outputs.ssh-agent-pid }}
+          OUTPUT_SSH_AUTH_SOCK: ${{ steps.gitlab.outputs.ssh-auth-sock }}
         run:
           sh ./test/test.sh
