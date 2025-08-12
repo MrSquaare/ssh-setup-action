@@ -87,7 +87,7 @@ jobs:
       - name: Clone GitLab repository
         run: |
           rm -rf private-repository
-          git clone git@altssh.gitlab.com:MrSquaare/private-repository.git
+          git clone ssh://git@altssh.gitlab.com:443/MrSquaare/private-repository.git
 
       - name: Run tests for GitLab
         env:
