@@ -56,6 +56,7 @@ jobs:
 
       - name: Setup GitHub SSH
         uses: ./
+        id: github
         with:
           host: github.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
@@ -64,11 +65,22 @@ jobs:
         run: |
           git clone git@github.com:MrSquaare/private-repository.git
 
+      - name: Run tests for GitHub
+        env:
+          OUTPUT_SSH_PATH: ${{ steps.github.outputs.ssh-path }}
+          OUTPUT_SSH_AGENT_PID: ${{ steps.github.outputs.ssh-agent-pid }}
+          OUTPUT_SSH_AUTH_SOCK: ${{ steps.github.outputs.ssh-auth-sock }}
+        run:
+          sh ./test/test.sh
+
       - name: Setup GitLab SSH
         uses: ./
-        id: setup
+        id: gitlab
         with:
-          host: gitlab.com
+          # GitLab supports SSH on port 443
+          # See https://docs.gitlab.com/user/gitlab_com/#alternative-ssh-port
+          host: altssh.gitlab.com
+          port: 443
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
           private-key-name: gitlab
 
@@ -77,10 +89,10 @@ jobs:
           rm -rf private-repository
           git clone git@gitlab.com:MrSquaare/private-repository.git
 
-      - name: Run tests
+      - name: Run tests for GitLab
         env:
-          OUTPUT_SSH_PATH: ${{ steps.setup.outputs.ssh-path }}
-          OUTPUT_SSH_AGENT_PID: ${{ steps.setup.outputs.ssh-agent-pid }}
-          OUTPUT_SSH_AUTH_SOCK: ${{ steps.setup.outputs.ssh-auth-sock }}
+          OUTPUT_SSH_PATH: ${{ steps.gitlab.outputs.ssh-path }}
+          OUTPUT_SSH_AGENT_PID: ${{ steps.gitlab.outputs.ssh-agent-pid }}
+          OUTPUT_SSH_AUTH_SOCK: ${{ steps.gitlab.outputs.ssh-auth-sock }}
         run:
           sh ./test/test.sh
