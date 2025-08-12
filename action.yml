@@ -10,8 +10,7 @@ inputs:
     required: true
   port:
     description: "SSH port"
-    type: number
-    default: 22
+    default: "22"
     required: false
   private-key:
     description: "SSH private key"
@@ -23,5 +22,5 @@ inputs:
 runs:
   using: "node20"
   main: "lib/index.js"
-  post: 'lib/cleanup.js'
-  post-if: 'always()'
+  post: "lib/cleanup.js"
+  post-if: "always()"
