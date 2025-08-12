@@ -1,6 +1,6 @@
 {
   "name": "ssh-setup-action",
-  "version": "3.0.0",
+  "version": "3.1.1",
   "description": "Setup SSH",
   "repository": {
     "type": "git",
