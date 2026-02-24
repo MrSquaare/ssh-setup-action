@@ -122,10 +122,12 @@ async function initializeSSHAgent(): Promise<SSHAgent> {
     // Exit code 0 = keys listed, 1 = agent running but no keys — both mean agent is alive
     // Exit code 2 = agent not running
     if (code !== 2) {
+      core.saveState("started-agent", "false");
       return { pid: existingPid, socket: existingSocket };
     }
   }
 
+  core.saveState("started-agent", "true");
   const { code, stdout, stderr } = await execute("ssh-agent", ["-s"]);
 
   if (code !== 0) {
