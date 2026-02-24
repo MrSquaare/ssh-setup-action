@@ -113,6 +113,19 @@ function initializeSSH(): string {
 }
 
 async function initializeSSHAgent(): Promise<SSHAgent> {
+  const existingSocket = process.env.SSH_AUTH_SOCK;
+  const existingPid = process.env.SSH_AGENT_PID;
+
+  if (existingSocket && existingPid) {
+    const { code } = await execute("ssh-add", ["-l"]);
+
+    // Exit code 0 = keys listed, 1 = agent running but no keys — both mean agent is alive
+    // Exit code 2 = agent not running
+    if (code !== 2) {
+      return { pid: existingPid, socket: existingSocket };
+    }
+  }
+
   const { code, stdout, stderr } = await execute("ssh-agent", ["-s"]);
 
   if (code !== 0) {
