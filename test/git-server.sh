@@ -27,7 +27,7 @@ start() {
   docker exec "$container_id" sh -lc 'mkdir -p /root/.ssh /repos'
   docker cp "$ssh_dir/authorized_keys" "$container_id:/root/.ssh/authorized_keys"
   docker cp "$repos_dir/." "$container_id:/repos"
-  docker exec "$container_id" sh -lc 'chmod 700 /root/.ssh && chmod 600 /root/.ssh/authorized_keys'
+  docker exec "$container_id" sh -lc 'chown -R root:root /root/.ssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/authorized_keys'
 
   # Give sshd a moment to initialize.
   sleep 0.3
