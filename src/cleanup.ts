@@ -6,10 +6,7 @@ try {
   execFileSync("ssh-agent", ["-k"], { stdio: "inherit" });
 } catch (error) {
   if (error instanceof Error) {
-    console.warn(
-      "Error stopping the SSH agent, proceeding anyway:",
-      error.message,
-    );
+    console.warn("Error stopping the SSH agent, proceeding anyway:", error.message);
   }
   console.warn("Error stopping the SSH agent, proceeding anyway");
 }

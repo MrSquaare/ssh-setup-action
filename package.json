@@ -20,20 +20,20 @@
     "test": "sh ./test/test.sh"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/exec": "^1.1.1",
-    "nanoid": "^5.1.5",
+    "@actions/core": "^3.0.0",
+    "@actions/exec": "^3.0.0",
+    "nanoid": "^5.1.6",
     "valid-filename": "^4.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.19.10",
+    "@types/node": "^20.19.37",
     "oxfmt": "^0.36.0",
     "oxlint": "^1.51.0",
     "rolldown": "1.0.0-rc.7",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.14.0"
+  "packageManager": "pnpm@10.30.3"
 }
