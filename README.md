@@ -33,11 +33,11 @@ jobs:
     name: Example
     runs-on: ubuntu-latest
     steps:
-    - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v3
-      with:
-        host: github.com
-        private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Setup SSH
+        uses: MrSquaare/ssh-setup-action@v3
+        with:
+          host: github.com
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
 
 ## Environment variables
@@ -70,13 +70,13 @@ jobs:
     name: Clone
     runs-on: ubuntu-latest
     steps:
-    - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v3
-      with:
-        host: github.com
-        private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Clone repository
-      run: git clone git@github.com:username/repository.git
+      - name: Setup SSH
+        uses: MrSquaare/ssh-setup-action@v3
+        with:
+          host: github.com
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Clone repository
+        run: git clone git@github.com:username/repository.git
 ```
 
 ### Multiple keys and multiple clone
@@ -91,31 +91,31 @@ jobs:
     name: Clone
     runs-on: ubuntu-latest
     steps:
-    - name: Setup GitHub SSH
-      uses: MrSquaare/ssh-setup-action@v3
-      with:
-        host: github.com
-        private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
-        private-key-name: github
-    - name: Setup GitLab SSH
-      uses: MrSquaare/ssh-setup-action@v3
-      with:
-        host: gitlab.com
-        private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
-        private-key-name: gitlab
-    - name: Setup Server SSH with custom port
-      uses: MrSquaare/ssh-setup-action@v3
-      with:
-        host: 1.2.3.4
-        port: 8000
-        private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
-        private-key-name: server
-    - name: Clone GitHub repository
-      run: git clone git@github.com:username/repository.git
-    - name: Clone GitLab repository
-      run: git clone git@gitlab.com:username/repository.git
-    - name: SSH to server
-      run: ssh -p 8000 ubuntu@1.2.3.4 'echo Hello'
+      - name: Setup GitHub SSH
+        uses: MrSquaare/ssh-setup-action@v3
+        with:
+          host: github.com
+          private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
+          private-key-name: github
+      - name: Setup GitLab SSH
+        uses: MrSquaare/ssh-setup-action@v3
+        with:
+          host: gitlab.com
+          private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
+          private-key-name: gitlab
+      - name: Setup Server SSH with custom port
+        uses: MrSquaare/ssh-setup-action@v3
+        with:
+          host: 1.2.3.4
+          port: 8000
+          private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
+          private-key-name: server
+      - name: Clone GitHub repository
+        run: git clone git@github.com:username/repository.git
+      - name: Clone GitLab repository
+        run: git clone git@gitlab.com:username/repository.git
+      - name: SSH to server
+        run: ssh -p 8000 ubuntu@1.2.3.4 'echo Hello'
 ```
 
 ## Contributing

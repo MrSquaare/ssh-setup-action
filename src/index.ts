@@ -132,15 +132,12 @@ async function initializeSSHAgent(): Promise<SSHAgent> {
 
   if (code !== 0) {
     console.error("Failed to initialize ssh agent:", stderr);
+
     throw new Error("Failed to initialize ssh agent");
   }
 
-  const pidMatch: RegExpMatchArray | null = stdout.match(
-    "SSH_AGENT_PID=(.*?);",
-  );
-  const socketMatch: RegExpMatchArray | null = stdout.match(
-    "SSH_AUTH_SOCK=(.*?);",
-  );
+  const pidMatch: RegExpMatchArray | null = stdout.match("SSH_AGENT_PID=(.*?);");
+  const socketMatch: RegExpMatchArray | null = stdout.match("SSH_AUTH_SOCK=(.*?);");
 
   return {
     pid: pidMatch ? pidMatch[1] : null,
@@ -150,11 +147,7 @@ async function initializeSSHAgent(): Promise<SSHAgent> {
 
 async function addKnownHost(sshPath: string, host: string, port: string) {
   const knownHostsPath: string = path.join(sshPath, "known_hosts");
-  const { code, stdout, stderr } = await execute("ssh-keyscan", [
-    "-p",
-    port,
-    host,
-  ]);
+  const { code, stdout, stderr } = await execute("ssh-keyscan", ["-p", port, host]);
 
   if (code !== 0) {
     console.error("Failed to add host to known hosts:", stderr);

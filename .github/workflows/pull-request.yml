@@ -1,38 +1,39 @@
 name: Pull Request
 
-on: [pull_request, workflow_dispatch]
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+
+      - name: Check lint and format
+        run: |
+          pnpm check
+
   build:
     strategy:
       matrix:
         os:
           - macos-latest
           - ubuntu-latest
-        node:
-          - 20
 
+    name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-
-    name: Build on ${{ matrix.os }} with Node ${{ matrix.node }}
-
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v6
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: |
-          pnpm install
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
 
       - name: Build
         run: |
@@ -45,14 +46,10 @@ jobs:
           - macos-latest
           - ubuntu-latest
 
-    runs-on: ${{ matrix.os }}
-
     name: Test on ${{ matrix.os }}
-
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v6
 
       - name: Setup GitHub SSH
         uses: ./
@@ -70,7 +67,7 @@ jobs:
           OUTPUT_SSH_PATH: ${{ steps.github.outputs.ssh-path }}
           OUTPUT_SSH_AGENT_PID: ${{ steps.github.outputs.ssh-agent-pid }}
           OUTPUT_SSH_AUTH_SOCK: ${{ steps.github.outputs.ssh-auth-sock }}
-        run:
+        run: |
           sh ./test/test.sh
 
       - name: Setup GitLab SSH
@@ -94,5 +91,5 @@ jobs:
           OUTPUT_SSH_PATH: ${{ steps.gitlab.outputs.ssh-path }}
           OUTPUT_SSH_AGENT_PID: ${{ steps.gitlab.outputs.ssh-agent-pid }}
           OUTPUT_SSH_AUTH_SOCK: ${{ steps.gitlab.outputs.ssh-auth-sock }}
-        run:
+        run: |
           sh ./test/test.sh

@@ -1,4 +1,4 @@
 ---
 exclude_paths:
-  - 'lib/**'
-  - 'node_modules/**'
+  - "lib/**"
+  - "node_modules/**"
