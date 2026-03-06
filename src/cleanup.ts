@@ -12,7 +12,8 @@ if (startedAgent === "false") {
   } catch (error) {
     if (error instanceof Error) {
       console.warn("Error stopping the SSH agent, proceeding anyway:", error.message);
+    } else {
+      console.warn("Error stopping the SSH agent, proceeding anyway");
     }
-    console.warn("Error stopping the SSH agent, proceeding anyway");
   }
 }
