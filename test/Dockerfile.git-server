@@ -1,0 +1,8 @@
+FROM alpine:3.23
+
+RUN apk add --no-cache openssh-server git \
+  && mkdir -p /run/sshd /repos
+
+EXPOSE 22
+
+CMD ["sh", "-lc", "ssh-keygen -A && exec /usr/sbin/sshd -D -e"]

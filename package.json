@@ -17,8 +17,7 @@
   "scripts": {
     "build": "rolldown -c",
     "check": "oxlint . && oxfmt --check .",
-    "check:fix": "oxlint . --fix && oxfmt --write .",
-    "test": "sh ./test/test.sh"
+    "check:fix": "oxlint . --fix && oxfmt --write ."
   },
   "dependencies": {
     "@actions/core": "^3.0.0",
