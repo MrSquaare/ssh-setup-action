@@ -14,8 +14,7 @@
   "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
   "main": "src/index.ts",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "build": "ncc build src/index.ts -o lib -m",
+    "build": "rolldown -c",
     "lint": "eslint .",
     "format": "eslint --fix .",
     "test": "sh ./test/test.sh"
@@ -23,11 +22,11 @@
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@types/node": "^20.19.10",
-    "@vercel/ncc": "^0.38.3",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2",
+    "rolldown": "1.0.0-rc.7",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.1"
   },
