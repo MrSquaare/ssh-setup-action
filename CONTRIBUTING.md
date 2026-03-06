@@ -45,16 +45,10 @@ pnpm build
 
 ## Testing
 
-Lint the code:
+Check the code:
 
 ```shell script
-pnpm lint
-```
-
-Format the code:
-
-```shell script
-pnpm format
+pnpm check
 ```
 
 Run workflows with [act](https://github.com/nektos/act):
