@@ -58,6 +58,7 @@ pnpm format
 ```
 
 Run workflows with [act](https://github.com/nektos/act):
+
 ```
 act pull_request
 ```
