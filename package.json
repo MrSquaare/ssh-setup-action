@@ -2,39 +2,35 @@
   "name": "ssh-setup-action",
   "version": "3.1.1",
   "description": "Setup SSH",
+  "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
+  "bugs": {
+    "url": "https://github.com/MrSquaare/ssh-setup-action/issues"
+  },
+  "license": "MIT",
+  "author": "MrSquaare",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MrSquaare/ssh-setup-action.git"
   },
-  "author": "MrSquaare",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MrSquaare/ssh-setup-action/issues"
-  },
-  "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
   "main": "src/index.ts",
   "scripts": {
     "build": "rolldown -c",
-    "lint": "eslint .",
-    "format": "eslint --fix .",
+    "check": "oxlint . && oxfmt --check .",
+    "check:fix": "oxlint . --fix && oxfmt --write .",
     "test": "sh ./test/test.sh"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.33.0",
-    "@types/node": "^20.19.10",
-    "eslint": "^9.33.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2",
-    "rolldown": "1.0.0-rc.7",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.39.1"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/exec": "^1.1.1",
     "nanoid": "^5.1.5",
     "valid-filename": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.10",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
+    "rolldown": "1.0.0-rc.7",
+    "typescript": "^5.9.2"
   },
   "engines": {
     "node": ">=20"
