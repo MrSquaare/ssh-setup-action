@@ -1,6 +1,6 @@
 {
   "name": "ssh-setup-action",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Setup SSH",
   "homepage": "https://github.com/MrSquaare/ssh-setup-action#readme",
   "bugs": {
@@ -17,8 +17,7 @@
   "scripts": {
     "build": "rolldown -c",
     "check": "oxlint . && oxfmt --check .",
-    "check:fix": "oxlint . --fix && oxfmt --write .",
-    "test": "sh ./test/test.sh"
+    "check:fix": "oxlint . --fix && oxfmt --write ."
   },
   "dependencies": {
     "@actions/core": "^3.0.0",

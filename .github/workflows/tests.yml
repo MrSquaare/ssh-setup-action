@@ -1,0 +1,204 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  single-key-and-clone:
+    name: Single key and clone
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup fixtures
+        id: fixture
+        run: sh ./test/single-test.sh setup
+        env:
+          TMPDIR: ${{ runner.temp }}
+
+      - name: Start git server
+        id: git
+        run: sh ./test/git-server.sh start "${{ steps.fixture.outputs.case_dir }}" "${{ steps.fixture.outputs.port }}" "${{ steps.fixture.outputs.ssh_dir }}" "${{ steps.fixture.outputs.repos_dir }}"
+
+      - name: Setup SSH action
+        id: setup_ssh
+        uses: ./
+        with:
+          host: ${{ steps.fixture.outputs.host }}
+          port: ${{ steps.fixture.outputs.port }}
+          private-key: ${{ steps.fixture.outputs.private_key }}
+          private-key-name: id_rsa
+
+      - name: Verify test
+        run: sh ./test/single-test.sh verify
+        env:
+          TEST_CASE_DIR: ${{ steps.fixture.outputs.case_dir }}
+          TEST_SSH_USER: ${{ steps.fixture.outputs.ssh_user }}
+          TEST_SSH_PORT: ${{ steps.fixture.outputs.port }}
+          REPO_ONE: ${{ steps.fixture.outputs.repo_one }}
+          ACTION_SSH_PATH: ${{ env.SSH_PATH }}
+          ACTION_SSH_AGENT_PID: ${{ env.SSH_AGENT_PID }}
+          ACTION_SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
+          OUTPUT_SSH_PATH: ${{ steps.setup_ssh.outputs.ssh-path }}
+          OUTPUT_SSH_AGENT_PID: ${{ steps.setup_ssh.outputs.ssh-agent-pid }}
+          OUTPUT_SSH_AUTH_SOCK: ${{ steps.setup_ssh.outputs.ssh-auth-sock }}
+
+  multiple-keys-and-clone:
+    name: Multiple keys and multiple clone
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup fixtures
+        id: fixture
+        run: sh ./test/multiple-test.sh setup
+        env:
+          TMPDIR: ${{ runner.temp }}
+
+      - name: Start git server
+        id: git
+        run: sh ./test/git-server.sh start "${{ steps.fixture.outputs.case_dir }}" "${{ steps.fixture.outputs.port }}" "${{ steps.fixture.outputs.ssh_dir }}" "${{ steps.fixture.outputs.repos_dir }}"
+
+      - name: Setup key 1
+        id: key1
+        uses: ./
+        with:
+          host: ${{ steps.fixture.outputs.host }}
+          port: ${{ steps.fixture.outputs.port }}
+          private-key: ${{ steps.fixture.outputs.private_key_github }}
+          private-key-name: github
+
+      - name: Setup key 2
+        id: key2
+        uses: ./
+        with:
+          host: ${{ steps.fixture.outputs.host }}
+          port: ${{ steps.fixture.outputs.port }}
+          private-key: ${{ steps.fixture.outputs.private_key_gitlab }}
+          private-key-name: gitlab
+
+      - name: Setup key 3
+        id: key3
+        uses: ./
+        with:
+          host: ${{ steps.fixture.outputs.host }}
+          port: ${{ steps.fixture.outputs.port }}
+          private-key: ${{ steps.fixture.outputs.private_key_server }}
+          private-key-name: server
+
+      - name: Verify test
+        run: sh ./test/multiple-test.sh verify
+        env:
+          TEST_CASE_DIR: ${{ steps.fixture.outputs.case_dir }}
+          TEST_SSH_USER: ${{ steps.fixture.outputs.ssh_user }}
+          TEST_SSH_PORT: ${{ steps.fixture.outputs.port }}
+          REPO_ONE: ${{ steps.fixture.outputs.repo_one }}
+          REPO_TWO: ${{ steps.fixture.outputs.repo_two }}
+          ACTION1_SSH_AGENT_PID: ${{ steps.key1.outputs.ssh-agent-pid }}
+          ACTION1_SSH_AUTH_SOCK: ${{ steps.key1.outputs.ssh-auth-sock }}
+          ACTION2_SSH_AGENT_PID: ${{ steps.key2.outputs.ssh-agent-pid }}
+          ACTION2_SSH_AUTH_SOCK: ${{ steps.key2.outputs.ssh-auth-sock }}
+          ACTION3_SSH_AGENT_PID: ${{ steps.key3.outputs.ssh-agent-pid }}
+          ACTION3_SSH_AUTH_SOCK: ${{ steps.key3.outputs.ssh-auth-sock }}
+          ACTION3_SSH_PATH: ${{ env.SSH_PATH }}
+
+  reuse-with-stale-env:
+    name: Reuse with stale env
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup fixtures
+        id: fixture
+        run: sh ./test/multiple-reuse-stale-test.sh setup
+        env:
+          TMPDIR: ${{ runner.temp }}
+
+      - name: Start git server
+        id: git
+        run: sh ./test/git-server.sh start "${{ steps.fixture.outputs.case_dir }}" "${{ steps.fixture.outputs.port }}" "${{ steps.fixture.outputs.ssh_dir }}" "${{ steps.fixture.outputs.repos_dir }}"
+
+      - name: Setup key with stale env
+        id: setup_ssh
+        uses: ./
+        env:
+          SSH_AUTH_SOCK: /tmp/non-existent.sock
+          SSH_AGENT_PID: "999999"
+        with:
+          host: ${{ steps.fixture.outputs.host }}
+          port: ${{ steps.fixture.outputs.port }}
+          private-key: ${{ steps.fixture.outputs.private_key }}
+          private-key-name: stale
+
+      - name: Verify test
+        run: sh ./test/multiple-reuse-stale-test.sh verify
+        env:
+          TEST_CASE_DIR: ${{ steps.fixture.outputs.case_dir }}
+          TEST_SSH_USER: ${{ steps.fixture.outputs.ssh_user }}
+          TEST_SSH_PORT: ${{ steps.fixture.outputs.port }}
+          REPO_ONE: ${{ steps.fixture.outputs.repo_one }}
+          ACTION_SSH_AGENT_PID: ${{ steps.setup_ssh.outputs.ssh-agent-pid }}
+          ACTION_SSH_AUTH_SOCK: ${{ steps.setup_ssh.outputs.ssh-auth-sock }}
+          ACTION_SSH_PATH: ${{ env.SSH_PATH }}
+          FAKE_SSH_AGENT_PID: "999999"
+          FAKE_SSH_AUTH_SOCK: /tmp/non-existent.sock
+
+  action-not-called-fails:
+    name: Action not called should fail clone
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup fixtures
+        id: fixture
+        run: sh ./test/no-action-test.sh setup
+        env:
+          TMPDIR: ${{ runner.temp }}
+
+      - name: Start git server
+        id: git
+        run: sh ./test/git-server.sh start "${{ steps.fixture.outputs.case_dir }}" "${{ steps.fixture.outputs.port }}" "${{ steps.fixture.outputs.ssh_dir }}" "${{ steps.fixture.outputs.repos_dir }}"
+
+      - name: Verify no-action failure
+        run: sh ./test/no-action-test.sh verify
+        env:
+          TEST_CASE_DIR: ${{ steps.fixture.outputs.case_dir }}
+          TEST_SSH_USER: ${{ steps.fixture.outputs.ssh_user }}
+          TEST_SSH_PORT: ${{ steps.fixture.outputs.port }}
+          REPO_ONE: ${{ steps.fixture.outputs.repo_one }}
+
+  missing-private-key-fails:
+    name: Missing private key should fail action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup fixtures
+        id: fixture
+        run: sh ./test/missing-private-key-test.sh setup
+        env:
+          TMPDIR: ${{ runner.temp }}
+
+      - name: Start git server
+        id: git
+        run: sh ./test/git-server.sh start "${{ steps.fixture.outputs.case_dir }}" "${{ steps.fixture.outputs.port }}" "${{ steps.fixture.outputs.ssh_dir }}" "${{ steps.fixture.outputs.repos_dir }}"
+
+      - name: Run action without private key
+        id: missing_key_action
+        continue-on-error: true
+        uses: ./
+        with:
+          host: ${{ steps.fixture.outputs.host }}
+          port: ${{ steps.fixture.outputs.port }}
+
+      - name: Verify missing-key failure
+        run: sh ./test/missing-private-key-test.sh verify
+        env:
+          TEST_CASE_DIR: ${{ steps.fixture.outputs.case_dir }}
+          TEST_SSH_USER: ${{ steps.fixture.outputs.ssh_user }}
+          TEST_SSH_PORT: ${{ steps.fixture.outputs.port }}
+          REPO_ONE: ${{ steps.fixture.outputs.repo_one }}
+          ACTION_OUTCOME: ${{ steps.missing_key_action.outcome }}

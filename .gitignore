@@ -4,9 +4,14 @@ keys/
 # Node
 node_modules/
 
+# pnpm
+.pnpm-store/
+
 # Jetbrains
 .idea/
 
 # Visual Studio Code
 .vscode/
 
+# macOS
+.DS_Store

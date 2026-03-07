@@ -108,7 +108,7 @@ jobs:
         with:
           host: 1.2.3.4
           port: 8000
-          private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
+          private-key: ${{ secrets.SSH_PRIVATE_KEY_CUSTOM }}
           private-key-name: server
       - name: Clone GitHub repository
         run: git clone git@github.com:username/repository.git
