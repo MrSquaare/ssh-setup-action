@@ -19,7 +19,7 @@ Setup SSH
 
 This GitHub action helps you to setup SSH.
 
-It support Node.js 20+ for Linux and macOS runners.
+Requires [Runner v2.327.1](https://github.com/actions/runner/releases/tag/v2.327.1) or later to run (Node.js 24 runtime).
 
 ## Using
 

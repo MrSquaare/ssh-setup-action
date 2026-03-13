@@ -27,7 +27,7 @@ outputs:
   ssh-auth-sock:
     description: "Path to the SSH auth socket"
 runs:
-  using: "node20"
+  using: "node24"
   main: "lib/index.js"
   post: "lib/cleanup.js"
   post-if: "always()"
