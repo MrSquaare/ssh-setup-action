@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup SSH
-        uses: MrSquaare/ssh-setup-action@v3
+        uses: MrSquaare/ssh-setup-action@v4
         with:
           host: github.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup SSH
-        uses: MrSquaare/ssh-setup-action@v3
+        uses: MrSquaare/ssh-setup-action@v4
         with:
           host: github.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -92,19 +92,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup GitHub SSH
-        uses: MrSquaare/ssh-setup-action@v3
+        uses: MrSquaare/ssh-setup-action@v4
         with:
           host: github.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB }}
           private-key-name: github
       - name: Setup GitLab SSH
-        uses: MrSquaare/ssh-setup-action@v3
+        uses: MrSquaare/ssh-setup-action@v4
         with:
           host: gitlab.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY_GITLAB }}
           private-key-name: gitlab
       - name: Setup Server SSH with custom port
-        uses: MrSquaare/ssh-setup-action@v3
+        uses: MrSquaare/ssh-setup-action@v4
         with:
           host: 1.2.3.4
           port: 8000
